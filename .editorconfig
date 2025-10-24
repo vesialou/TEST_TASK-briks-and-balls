@@ -1,0 +1,3 @@
+[*.cs]
+# RootNamespace namespace для Rider
+resharper_csharp_root_namespace = BricksAndBalls

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b47c4e70a3406ca47da139c2c8f145, type: 3}
+  m_Name: PopupRegistryConfig
+  m_EditorClassIdentifier: 
+  _entries:
+  - PresenterTypeName: popup_gameover
+    PopupPrefab: {fileID: 7546455404847892595, guid: 5e2bc85e0c2656e4d8c5b4e8f317384f, type: 3}
+  - PresenterTypeName: popup_multiplayer
+    PopupPrefab: {fileID: -190441016469405859, guid: 77e91e5e1cfc56c44b0b8b0f63f0a4c9, type: 3}
+  - PresenterTypeName: popup_settings
+    PopupPrefab: {fileID: 8850976595122442716, guid: e9c5d2eb0915d55429f31e975637ce13, type: 3}
+  - PresenterTypeName: popup_leaderboard
+    PopupPrefab: {fileID: 704371882362699916, guid: f51a35c77a8483f4a926e57b02d5c76f, type: 3}
