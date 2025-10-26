@@ -55,7 +55,6 @@ namespace BricksAndBalls.Core.Models
                 return;
             }
 
-            // 🟢 Победа — все блоки уничтожены
             if (aliveBricks <= 0)
             {
                 EndGame(GameResult.Win);
@@ -63,7 +62,6 @@ namespace BricksAndBalls.Core.Models
                 return;
             }
 
-            // 🔴 Поражение — блок достиг нижней линии
             if (hasReachedBottom)
             {
                 EndGame(GameResult.Loss);
@@ -71,7 +69,6 @@ namespace BricksAndBalls.Core.Models
                 return;
             }
 
-            // 🔴 Поражение — закончились раунды
             if (CurrentRound >= MaxRounds - 1 && aliveBricks > 0)
             {
                 EndGame(GameResult.Loss);

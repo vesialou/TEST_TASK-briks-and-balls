@@ -103,7 +103,6 @@ namespace BricksAndBalls.Views
 
             _flashTween?.Kill();
 
-            // Создаём sequence для плавного перехода туда-обратно
             _flashTween = DOTween.Sequence()
                 .Append(_sprite.DOColor(_hitColor, _hitFlashDuration * 0.5f))
                 .Append(_sprite.DOColor(_sprite.color, _hitFlashDuration * 0.5f))

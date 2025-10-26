@@ -42,10 +42,6 @@ namespace BricksAndBalls.Systems.Grid
             _positions[id] = newPos;
         }
 
-        /// <summary>
-        /// Возвращает snapshot в переиспользуемый буфер.
-        /// После использования — не сохраняй ссылку!
-        /// </summary>
         public IReadOnlyList<(int id, Vector2Int pos)> GetSnapshotBuffer()
         {
             _snapshotBuffer.Clear();

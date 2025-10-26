@@ -26,19 +26,15 @@ namespace BricksAndBalls.Systems.Playfield
         }
         public void FitToPlayfield(Rect worldRect)
         {
-            // 1️⃣ Учитываем padding
             var paddedWidth = worldRect.width * (1f + _paddingPercent * 2f);
             var paddedHeight = worldRect.height * (1f + _paddingPercent * 2f);
 
-            // 2️⃣ Вычисляем orthographicSize, чтобы камера точно вмещала поле
             var requiredSizeByWidth = paddedWidth / (2f * _camera.aspect);
             var requiredSizeByHeight = paddedHeight / 2f;
 
-            // Берём большее значение — гарантированно влезет всё поле
             var orthographicSize = Mathf.Max(requiredSizeByWidth, requiredSizeByHeight);
             _camera.orthographicSize = orthographicSize;
 
-            // 3️⃣ Центрируем камеру
             var cameraPosition = _camera.transform.position;
             cameraPosition.x = worldRect.center.x;
             cameraPosition.y = worldRect.center.y;

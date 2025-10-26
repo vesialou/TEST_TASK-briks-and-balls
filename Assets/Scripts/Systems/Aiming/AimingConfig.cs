@@ -2,9 +2,6 @@
 
 namespace BricksAndBalls.Configs
 {
-    /// <summary>
-    /// Конфигурация для системы прицеливания (опционально)
-    /// </summary>
     [CreateAssetMenu(fileName = "AimingConfig", menuName = "Game/Aiming Config")]
     public class AimingConfig : ScriptableObject
     {
@@ -30,10 +27,10 @@ namespace BricksAndBalls.Configs
 
         [Header("Reflection Settings")]
         [SerializeField] [Range(0f, 0.1f)]
-        private float _reflectionOffset = 0.01f; // Отступ от точки отражения
+        private float _reflectionOffset = 0.01f;
         
         [SerializeField]
-        private bool _showSecondReflection = false; // Показывать второе отражение
+        private bool _showSecondReflection = false;
 
         public float MinSwipeDistance => _minSwipeDistance;
         public float MaxRayDistance => _maxRayDistance;

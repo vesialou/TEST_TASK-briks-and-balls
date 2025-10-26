@@ -32,11 +32,9 @@ namespace BricksAndBalls.Systems.Playfield
                 return;
             }
 
-            // Центрируем фон в мире
             transform.position = new Vector3(worldRect.center.x, worldRect.center.y, 10f);
 
-            // Подгоняем размеры под WorldRect (вместо изменения scale)
-            _renderer.drawMode = SpriteDrawMode.Tiled; // на всякий случай, если забыли
+            _renderer.drawMode = SpriteDrawMode.Tiled;
             _renderer.size = new Vector2(worldRect.width, worldRect.height);
         }
     }

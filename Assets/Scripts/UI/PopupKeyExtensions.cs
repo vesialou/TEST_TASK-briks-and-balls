@@ -5,18 +5,11 @@ namespace BricksAndBalls.UI
 {
     public static class PopupKeyExtensions
     {
-        /// <summary>
-        /// Генерирует стандартный ключ загрузки popup-префаба из типа презентера.
-        /// Пример: MultiplayerPopupPresenter → "popup_multiplayerpopup"
-        /// </summary>
         public static string GetPopupKey<TPresenter>() where TPresenter : IPopupPresenterMarker
         {
             return GetPopupKey(typeof(TPresenter));
         }
 
-        /// <summary>
-        /// Универсальный вариант для произвольного типа презентера.
-        /// </summary>
         public static string GetPopupKey(Type presenterType)
         {
             if (presenterType == null)

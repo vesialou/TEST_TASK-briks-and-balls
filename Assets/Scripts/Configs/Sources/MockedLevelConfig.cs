@@ -9,7 +9,6 @@ namespace Configs
     {
         public List<BrickData> GetLevelData()
         {
-            // Массив наличия блоков (1 = есть блок, 0 = пусто)
             var presence = new int[,]
             {
                 // X: 0  1  2  3  4  5  6  7  8  9
@@ -25,7 +24,6 @@ namespace Configs
                 {    1, 1, 1, 0, 1, 1, 1, 1, 1, 1 }, // Y=9 (BOTTOM)
             };
 
-            // Массив HP блоков
             var hp = new int[,]
             {
                 // X: 0  1  2  3  4  5  6  7  8  9
@@ -41,7 +39,6 @@ namespace Configs
                 {     1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, // Y=9
             };
 
-            // Массив типов блоков (0 = Normal, можно добавить другие типы)
             var types = new BrickType[,]
             {
                 // X: 0  1  2  3  4  5  6  7  8  9

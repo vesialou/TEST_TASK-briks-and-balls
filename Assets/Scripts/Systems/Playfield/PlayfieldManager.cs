@@ -66,7 +66,7 @@ namespace BricksAndBalls.Systems.Playfield
                 playableRect.height + topUIMargin + bottomUIMargin);
 
             _gridBuilder = new GridGeometryBuilder(
-                playableRect, // ← ВАЖНО: используем playableRect, НЕ WorldRect!
+                playableRect,
                 GridWidth,
                 GridHeight,
                 BottomReserveRows);
@@ -76,7 +76,6 @@ namespace BricksAndBalls.Systems.Playfield
             ActiveGridRect = _gridBuilder.ActiveGridRect;
             TotalWorldRows = _gridBuilder.TotalWorldRows;
 
-            // 6. Настраиваем камеру
             _cameraFitter = new CameraPlayfieldFitter(
                 _camera,
                 _logger,
@@ -85,7 +84,6 @@ namespace BricksAndBalls.Systems.Playfield
                 _gameConfig.CameraBottomUIMargin);
             _cameraFitter.FitToPlayfield(WorldRect);
 
-            // 7. Проверка видимости
             if (!_cameraFitter.IsRectFullyVisible(playableRect))
             {
                 _logger.LogWarning("PlayfieldManager: Playable area is not fully visible in camera!");

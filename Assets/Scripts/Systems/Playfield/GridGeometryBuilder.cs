@@ -52,7 +52,6 @@ namespace BricksAndBalls.Systems.Playfield
         public Vector3 GridToWorld(Vector2Int gridPos)
         {
             var worldX = GridOrigin.x + (gridPos.x + 0.5f) * CellSize;
-            // NOTE: Y=0 top. Y move down.
             var worldY = GridOrigin.y - (gridPos.y + 0.5f) * CellSize;
 
 
