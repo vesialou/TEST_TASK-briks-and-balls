@@ -32,13 +32,6 @@ namespace BricksAndBalls.Systems.Grid
 
         private void OnBrickMoved(GridBrickMovedSignal signal)
         {
-            if (!_registry.TryGet(signal.BrickID, out var view))
-            {
-                return;
-            }
-
-            var worldPos = _worldBuilder.GridToWorld(signal.NewPos);
-            view.transform.DOMove(worldPos, _config.RowDescendSpeed).SetEase(Ease.OutQuad);
         }
 
         public void Dispose()

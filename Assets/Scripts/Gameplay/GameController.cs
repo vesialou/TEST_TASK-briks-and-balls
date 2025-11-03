@@ -139,7 +139,6 @@ namespace BricksAndBalls.Gameplay
                     _sceneLoader.LoadGame();
                     break;
             }
-            _sceneLoader.LoadGame();
         }
     }
 }

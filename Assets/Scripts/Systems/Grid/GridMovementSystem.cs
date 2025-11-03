@@ -17,8 +17,8 @@ namespace BricksAndBalls.Systems.Grid
         private readonly SignalBus _signalBus;
         private readonly IAppLogger _logger;
 
-        private readonly int[] _brickBuffer = new int[512];
         private float _moveDuration = 0.5f;
+        private Sequence _sequence;
 
         public GridMovementSystem(
             PlayfieldManager playfieldManager,
@@ -37,7 +37,7 @@ namespace BricksAndBalls.Systems.Grid
         public async UniTask MoveGridDownAsync(CancellationToken ct = default)
         {
             _logger.Log("GridMovementSystem: Moving grid down...");
-            var seq = DOTween.Sequence().SetEase(Ease.OutQuad);
+            _sequence = DOTween.Sequence().SetEase(Ease.OutQuad);
             var snapshot = _gridSystem.GetSnapshotBuffer();
 
             foreach (var (brickID, oldPos) in snapshot)
@@ -47,23 +47,28 @@ namespace BricksAndBalls.Systems.Grid
                 if (_brickView.TryGet(brickID, out var view))
                 {
                     var worldPos = _playfieldManager.GridToWorld(newPos);
-                    seq.Join(view.transform.DOMove(worldPos, _moveDuration));
+                    var move = view.transform.DOMove(worldPos, _moveDuration);
+                    _sequence.Join(move);
                 }
 
                 _signalBus.Fire(new GridBrickMovedSignal { BrickID = brickID, NewPos = newPos });
             }
 
-            await using (ct.Register(() => { if (seq.IsActive())
-                                         {
-                                             seq.Kill();
-                                         }
-                                     }))
+            await using (ct.Register(TryKillSequence))
             {
-                await seq.AsyncWaitForCompletion();
+                await _sequence.AsyncWaitForCompletion();
             }
 
             _logger.Log(" Grid moved down!");
             _signalBus.Fire<GridDescendedSignal>();
+        }
+
+        private void TryKillSequence()
+        {
+            if (_sequence != null && _sequence.IsActive())
+            {
+                _sequence.Kill();
+            }
         }
     }
 }

@@ -43,7 +43,7 @@ namespace BricksAndBalls.Services.Leaderboard
 
         public void SavePlayerScore(int score)
         {
-            var gameScore = _storage.Load<GameScore>(LeaderboardKey);
+            var gameScore = _storage.Load(LeaderboardKey, new GameScore());
             gameScore.Score = score;
             _appLogger.Log($"Player score saved: {gameScore.Score}");
             _storage.Save(LeaderboardKey, gameScore);
@@ -51,7 +51,7 @@ namespace BricksAndBalls.Services.Leaderboard
         
         public int GetPlayerScore()
         {
-            var gameScore = _storage.Load<GameScore>(LeaderboardKey);
+            var gameScore = _storage.Load(LeaderboardKey, new GameScore());
             _appLogger.Log($"Player score is: {gameScore.Score}");
             return gameScore.Score;
         }

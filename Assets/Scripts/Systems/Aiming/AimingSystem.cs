@@ -20,14 +20,14 @@ namespace BricksAndBalls.Systems.Ball
         private LineRenderer _trajectoryLine;
         private GameObject _trajectoryObject;
 
-        private const float MIN_SWIPE_DISTANCE = 2f;
+        private const float MIN_SWIPE_DISTANCE = 0.3f;
         private const float MAX_RAY_DISTANCE = 30f;
         private const float LINE_WIDTH = 0.08f;
         private const float REFLECTION_OFFSET = 0.02f;
-        private const float AIM_SENSITIVITY = 0.1f;
+        private const float AIM_SENSITIVITY = 0.2f;
         
         
-        private const float SMOOTHING_SPEED = 10f;
+        private const float SMOOTHING_SPEED = 50f;
 
 
         public Vector2 CurrentDirection => _currentDirection;
