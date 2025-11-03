@@ -28,7 +28,7 @@ namespace BricksAndBalls.Gameplay
 
         public GameController(
             IGameConfig gameConfig,
-            IPopupService  popupService,
+            IPopupService popupService,
             GameStateMachine stateMachine,
             GameSession session,
             GameplayData gameplayData,
@@ -64,6 +64,7 @@ namespace BricksAndBalls.Gameplay
         {
             MoveGridDownAsync().Forget();
         }
+
         private async UniTaskVoid MoveGridDownAsync()
         {
             _logger.Log("Round ended - Descending grid");
@@ -93,48 +94,34 @@ namespace BricksAndBalls.Gameplay
         {
             OnGameOverAsync(signal).Forget();
         }
-        
+
         private async UniTaskVoid OnGameOverAsync(GameOverSignal signal)
         {
             _logger.Log($"Game Over: {(signal.IsWin ? "WIN" : "LOSS")}");
             _stateMachine.ChangeState(GameState.GameEnded);
-            var multiplayerData = new MultiplayerPopupData
-            {
-                CurrentScore = _scoreManager.CurrentScore,
-                Multipliers = _gameConfig.Multipliers
-            };
-            var multiplier = await _popupService.ShowAsync<MultiplayerPopupPresenter,
-                MultiplayerPopupData,
-                int>(multiplayerData);
-            
+            var multiplayerData = new MultiplayerPopupData { CurrentScore = _scoreManager.CurrentScore, Multipliers = _gameConfig.Multipliers };
+            var multiplier = await _popupService.ShowAsync<MultiplayerPopupPresenter, MultiplayerPopupData, int>(multiplayerData);
+
             _scoreManager.ApplyMultiplierAndSave(multiplier);
             var finalScore = _scoreManager.CurrentScore;
             _progressService.SaveGameResult(signal.IsWin, finalScore);
-            
-            await _popupService.ShowAsync<LeaderboardPopupPresenter>();
-            
-            var gameOverData = new GameOverPopupData
-            {
-                IsWin = signal.IsWin,
-                Score = _scoreManager.CurrentScore,
-                HasNextLevel = false
-            };
 
-            var result = await _popupService.ShowAsync<
-                GameOverPopupPresenter,
-                GameOverPopupData,
-                GameOverPopupResult>(gameOverData);
-            
+            await _popupService.ShowAsync<LeaderboardPopupPresenter>();
+
+            var gameOverData = new GameOverPopupData { IsWin = signal.IsWin, Score = _scoreManager.CurrentScore, HasNextLevel = false };
+
+            var result = await _popupService.ShowAsync<GameOverPopupPresenter, GameOverPopupData, GameOverPopupResult>(gameOverData);
+
             switch (result.State)
             {
                 case GameOverPopupResult.ResultType.Menu:
                     _sceneLoader.LoadMainMenu();
                     break;
-                
+
                 case GameOverPopupResult.ResultType.Replay:
                     _sceneLoader.ReloadCurrentScene();
                     break;
-                
+
                 case GameOverPopupResult.ResultType.Next:
                     _sceneLoader.LoadGame();
                     break;

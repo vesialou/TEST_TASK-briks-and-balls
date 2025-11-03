@@ -42,12 +42,7 @@ namespace BricksAndBalls.Systems.Grid
         
         public bool TryGet(int id, out BrickPhysicsComponent component)
         {
-            if (_components.TryGetValue(id, out component))
-            {
-                return true;
-            }
-
-            return false;
+            return _components.TryGetValue(id, out component);
         }
 
         public void RegisterBottomHit(int brickID)
